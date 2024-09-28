@@ -22,8 +22,8 @@ function SigninPage() {
       redirect: false,
     });
 
-    // if (!res.error) router.push("/");
-    if (res.ok) router.push("/");
+    if (!res.error) router.push("/");
+    // if (res.ok) router.push("/");
   };
 
   return (
