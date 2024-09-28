@@ -2,6 +2,8 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SignupPage() {
   const [email, setEmail] = useState("");
@@ -24,29 +26,33 @@ function SignupPage() {
     const data = await res.json();
     console.log(data);
     if (data.status === "success") router.push("/signin");
+    if (data.status === "failed") toast.error(data.message);
   };
 
   return (
-    <div className="signin-form">
-      <h3>Registration Form</h3>
-      <input
-        type="text"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={signUpHandler}>Register</button>
-      <div>
-        <p>Have an account?</p>
-        <Link href="/signin">Sign in</Link>
+    <>
+      <div className="signin-form">
+        <h3>Registration Form</h3>
+        <input
+          type="text"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button onClick={signUpHandler}>Register</button>
+        <div>
+          <p>Have an account?</p>
+          <Link href="/signin">Sign in</Link>
+        </div>
       </div>
-    </div>
+      <ToastContainer />
+    </>
   );
 }
 
