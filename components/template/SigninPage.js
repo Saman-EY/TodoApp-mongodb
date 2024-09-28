@@ -12,8 +12,10 @@ function SigninPage() {
   const { status } = useSession();
 
   useEffect(() => {
-    if (status === "authenticated") router.replace("/");
-  }, [status, router]);
+    if (status) {
+      if (status === "authenticated") router.replace("/");
+    }
+  }, [status]);
 
   const loginHandler = async () => {
     const res = await signIn("credentials", {
