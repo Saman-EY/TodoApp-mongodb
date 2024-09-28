@@ -12,11 +12,7 @@ function SigninPage() {
   const { status } = useSession();
 
   useEffect(() => {
-    if (status === "authenticated") {
-      setTimeout(() => {
-        router.replace("/");
-      }, 500);
-    }
+    if (status === "authenticated") router.replace("/");
   }, [status, router]);
 
   const loginHandler = async () => {
@@ -26,11 +22,7 @@ function SigninPage() {
       redirect: false,
     });
 
-    if (!res.error) {
-      setTimeout(() => {
-        router.replace("/");
-      }, 1500);
-    }
+    if (!res.error) router.replace("/");
     // if (res.ok) router.push("/");
   };
 
