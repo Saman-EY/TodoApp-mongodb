@@ -12,9 +12,7 @@ function SigninPage() {
   const { status } = useSession();
 
   useEffect(() => {
-    if (status) {
       if (status === "authenticated") router.replace("/");
-    }
   }, [status]);
 
   const loginHandler = async () => {
